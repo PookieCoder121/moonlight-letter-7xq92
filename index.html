@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#2b061d" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>For You 💗</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="lock">
+  <canvas id="sky"></canvas>
+  <canvas id="confetti"></canvas>
+  <div class="noise"></div>
+
+  <div id="landing" class="screen">
+    <div class="card">
+      <div class="inside">
+        <div class="glow-heart">💗</div>
+        <p class="tiny">A tiny question before the magic begins</p>
+        <div id="landingText" class="question">Do you like me? ❤️</div>
+        <div class="buttons">
+          <button class="yes" id="yesBtn">Yes 💖</button>
+          <button class="no" id="noBtn">No 🥺</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="music" id="musicBtn" aria-label="music">♪</button>
+
+  <main id="main" class="main">
+    <section>
+      <div class="wide reveal">
+        <p class="tiny">This page was made only for you</p>
+        <h1 class="heroTitle">Hey <span class="script" id="herName">beautiful</span> ✨</h1>
+        <div class="type" id="typewriter"></div>
+        <div class="scrollHint">scroll slowly ↓</div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wide reveal">
+        <h2 class="sectionTitle">I wanted to say this properly…</h2>
+        <p class="para">
+          Not in a random message. Not in a rushed way. I wanted to make something soft,
+          cute and magical, because what I feel deserves more than just one line.
+        </p>
+        <div class="polaroid">
+          <div class="photo">💕</div>
+          <small>us, someday?</small>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wide reveal">
+        <h2 class="sectionTitle">Little reasons why you feel special</h2>
+        <div class="memoryGrid">
+          <div class="memory"><b>🌙</b><span>Your presence makes normal days feel softer.</span></div>
+          <div class="memory"><b>✨</b><span>Your smile has this unfair power over my mood.</span></div>
+          <div class="memory"><b>💌</b><span>Even small conversations with you stay in my head.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wide reveal">
+        <h2 class="sectionTitle">A small letter</h2>
+        <div class="letter">
+          <p>
+            I do not know the perfect way to say this, but I know I want to be honest with you.
+            Somewhere between talking to you, thinking about you, and smiling at the smallest
+            memories, I realized that you became special to me.
+          </p>
+          <p>
+            I like the way you exist in my life. I like the calm, the excitement, the butterflies,
+            and the tiny hope that maybe you feel something too.
+          </p>
+          <p>
+            So I made this page because I wanted you to feel what I could not fit into a normal text.
+            No pressure, no drama — just my heart, saying something real.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wide reveal choiceBox">
+        <p class="tiny">one last question</p>
+        <h2 class="finalQ">Will you be my special person? 💖</h2>
+        <p class="para">I promise to respect your answer, but I had to tell you what my heart was holding.</p>
+        <div class="buttons">
+          <button class="yes" id="finalYes">Yes, I will 💞</button>
+          <button class="no" id="finalNo">Let me think 🥺</button>
+        </div>
+
+        <div class="secret" id="secret">
+          <h2 class="sectionTitle" style="font-size:clamp(28px,7vw,48px)">You just made my heart very happy 😭💗</h2>
+          <p class="para">Take a screenshot and send it to me… because I am probably smiling like an idiot right now.</p>
+          <a class="whatsappBtn" id="waLink" href="#" target="_blank" rel="noopener">Send me your answer on WhatsApp 💬</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
