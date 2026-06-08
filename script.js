@@ -1,12 +1,7 @@
-/* ===============================
-   QUICK EDIT SECTION
-   Change these before sending.
-================================== */
 const CONFIG = {
-  herName: "Epshitaa", // Example: "Ananya"
-  yourName: "Vaibhav", // Example: "Rahul"
-  yourWhatsAppNumber: "+917091059921", // Put your number with country code, no +, no spaces. Example: "916202545006"
-  firstMessage: "I made this page because you are special to me.",
+  herName: "Epshitaa",
+  yourName: "Vaibhav",
+  yourWhatsAppNumber: "+917091059921",
   whatsappText: "Yes, I saw your page 💗",
   noTexts: [
     "Are you sure? 🥺",
@@ -17,7 +12,6 @@ const CONFIG = {
     "Last chance? 🥺✨"
   ]
 };
-/* =============================== */
 
 document.getElementById("herName").textContent = CONFIG.herName;
 
@@ -33,6 +27,23 @@ const musicBtn = document.getElementById("musicBtn");
 
 let noCount = 0;
 
+const galleryImages = [
+  {
+    src: "assets/pic1.jpg",
+    caption: "The first smile I want to keep safe 💗"
+  },
+  {
+    src: "assets/pic2.jpg",
+    caption: "A moment that feels soft in my heart ✨"
+  },
+  {
+    src: "assets/pic3.jpg",
+    caption: "Maybe someday, this becomes our story 🌙"
+  }
+];
+
+let currentPic = 0;
+
 yesBtn.addEventListener("click", openMagic);
 noBtn.addEventListener("click", dodgeNo);
 
@@ -45,6 +56,42 @@ document.getElementById("finalYes").addEventListener("click", () => {
 document.getElementById("finalNo").addEventListener("click", (e) => {
   e.currentTarget.textContent = "I will wait softly 💗";
   sparkleAt(e.clientX || innerWidth / 2, e.clientY || innerHeight / 2);
+});
+
+document.getElementById("prevPic").addEventListener("click", () => {
+  currentPic = (currentPic - 1 + galleryImages.length) % galleryImages.length;
+  updateGallery();
+});
+
+document.getElementById("nextPic").addEventListener("click", () => {
+  currentPic = (currentPic + 1) % galleryImages.length;
+  updateGallery();
+});
+
+function updateGallery(){
+  const img = document.getElementById("galleryImage");
+  const caption = document.getElementById("photoCaption");
+  const dots = document.querySelectorAll(".galleryDot");
+
+  img.style.opacity = "0";
+  img.style.transform = "scale(.96)";
+
+  setTimeout(() => {
+    img.src = galleryImages[currentPic].src;
+    caption.textContent = galleryImages[currentPic].caption;
+
+    dots.forEach((dot, index) => {
+      dot.classList.toggle("active", index === currentPic);
+    });
+
+    img.style.opacity = "1";
+    img.style.transform = "scale(1)";
+  }, 220);
+}
+
+document.getElementById("galleryImage").addEventListener("error", () => {
+  const caption = document.getElementById("photoCaption");
+  caption.textContent = "Upload pic1.jpg, pic2.jpg and pic3.jpg inside assets folder 💗";
 });
 
 function openMagic(){
@@ -219,70 +266,30 @@ setInterval(() => {
   }
 }, 900);
 
-/* Soft generated music: works after tap on iPhone */
-let audioCtx;
-let playing = false;
-let gain;
+/* Music file */
+const bgMusic = new Audio("assets/perfect.mp3");
+bgMusic.loop = true;
+bgMusic.volume = 0.45;
+
+let musicPlaying = false;
 
 musicBtn.addEventListener("click", async () => {
-  if(!audioCtx){
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-    gain = audioCtx.createGain();
-    gain.gain.value = 0.035;
-    gain.connect(audioCtx.destination);
-  }
-
-  if(audioCtx.state === "suspended"){
-    await audioCtx.resume();
-  }
-
-  if(!playing){
-    playing = true;
-    musicBtn.textContent = "♫";
-    playLoop();
-  }else{
-    playing = false;
-    musicBtn.textContent = "♪";
+  try{
+    if(!musicPlaying){
+      await bgMusic.play();
+      musicPlaying = true;
+      musicBtn.textContent = "♫";
+    }else{
+      bgMusic.pause();
+      musicPlaying = false;
+      musicBtn.textContent = "♪";
+    }
+  }catch(err){
+    alert("Tap once more to start the music 💗");
   }
 });
 
-function tone(freq, start, dur){
-  if(!playing || !audioCtx){
-    return;
-  }
-
-  const o = audioCtx.createOscillator();
-  const g = audioCtx.createGain();
-
-  o.type = "sine";
-  o.frequency.value = freq;
-
-  g.gain.setValueAtTime(0, start);
-  g.gain.linearRampToValueAtTime(0.06, start + 0.04);
-  g.gain.exponentialRampToValueAtTime(0.001, start + dur);
-
-  o.connect(g);
-  g.connect(gain);
-
-  o.start(start);
-  o.stop(start + dur + 0.05);
-}
-
-function playLoop(){
-  if(!playing || !audioCtx){
-    return;
-  }
-
-  const now = audioCtx.currentTime;
-  const melody = [392, 440, 523, 440, 392, 330, 392, 523];
-
-  melody.forEach((f, i) => tone(f, now + i * 0.38, 0.34));
-
-  setTimeout(playLoop, 3300);
-}
-
-/* Canvas star field */
+/* Stars */
 const sky = document.getElementById("sky");
 const sctx = sky.getContext("2d");
 
